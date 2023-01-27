@@ -1,0 +1,147 @@
+tagname	description
+LMAM_HC132#_NDPT01---_TPI	Pomiar cisnienia
+LMAM_HC132#_NDXRPI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC132#_WPFT01---_TFI	Pomiar przeplywu
+LMAM_HC132#_WPXRFI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC151B_NDPT01---_TPI	Cisnienie ND dla HC-151B.PT01
+LMAM_HC151B_WPFT01---_TFI	Przeplyw WP dla HC-151B.FT01
+LMAM_HC151B_WPXRFI1--_PV	Wart. mierz. przepl. WP dla HC-151B
+LMAM_HC201#_NDPT01---_TPI	Cisnienie ND dla HC-201B.PT01
+LMAM_HC201#_WPFT01---_TFI	Przeplyw WP dla HC-201B.FT01
+LMAM_HC201#_WPXRFI1--_PV	Wart. mierz. przepl. WP dla HC-201B
+LMAM_HC201-_NDXSDI16-_PV	Wart. mierz. gęst. ND dla HC-201
+LMAM_HC201-_NDXSDI8--_PV	MillVis Wartosc mierzona ges HC201
+LMAM_HC201A_NDDT01---_TDI	Gęstość nadawy dla HC-201A
+LMAM_HC201A_NDPT01---_TPI	Ciśnienie nadawy dla HC-201A.PT01
+LMAM_HC201A_NDXRPI1--_PV	Wart. mierzona ciśnienia nadawy dla HC-201A
+LMAM_HC201A_PL-------_TPS	Średnie uziarnienie dla HC-201A
+LMAM_HC201A_PLDT01---_TDI	Gęstość przelewu dla HC-201A
+LMAM_HC201A_PLKL90---_TPG	Uziarnienie dla HC-201A.KL90
+LMAM_HC201A_WL-------_TAN	Kąt strumienia dla HC-201A
+LMAM_HC201A_WPFT01---_TFI	Przepływ WP dla HC-201A.FT01
+LMAM_HC201A_WPXRFI1--_PV	Wart. mierz. przepł. WP dla HC-201A
+LMAM_HC201B_NDDT01---_TDI	Pomiar gestosci
+LMAM_HC201B_NDFT01---_TFI	Pomiar przeplywu
+LMAM_HC201B_NDPT01---_TPI	Pomiar cisnienia
+LMAM_HC201B_NDXRDI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC201B_NDXRFI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC201B_NDXRPI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC201B_WPFT01---_TFI	Pomiar przeplywu
+LMAM_HC201B_WPXRFI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC212-_NDXSDI16-_PV	Wart. mierz. gęst. ND dla HC-212
+LMAM_HC212-_NDXSDI8--_PV	MillVis Wartosc mierzona ges HC212
+LMAM_HC212-_NDXSFI8--_PV	MillVis Wartosc mierzona prz HC212
+LMAM_HC212A_NDDT01---_TDI	Pomiar gestosci
+LMAM_HC212A_NDFT01---_TFI	Pomiar przeplywu
+LMAM_HC212A_NDPT01---_TPI	Pomiar cisnienia
+LMAM_HC212A_NDXRDI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC212A_NDXRFI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC212A_NDXRPI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC212A_WPFT01---_TFI	Pomiar przeplywu
+LMAM_HC212A_WPXRFI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC212B_NDDT01---_TDI	Gęstość nadawy dla HC-212B
+LMAM_HC212B_NDFT01---_TFI	Przepływ nadawy dla HC-212B
+LMAM_HC212B_NDPT01---_TPI	Ciśnienie nadawy dla HC-212B.PT01
+LMAM_HC212B_NDXRPI1--_PV	Wart. mierzona ciśnienia nadawy dla HC-212B
+LMAM_HC212B_PL-------_TPS	Średnie uziarnienie dla HC-212B
+LMAM_HC212B_PLDT01---_TDI	Gęstość przelewu dla HC-212B
+LMAM_HC212B_PLKL90---_TPG	Uziarnienie dla HC-212B.KL90
+LMAM_HC212B_WL-------_TAN	Kąt strumienia dla HC-212B
+LMAM_HC212B_WPFT01---_TFI	Przepływ WP dla HC-211B.FT01
+LMAM_HC212B_WPXRFI1--_PV	Wart. mierz. przepł. WP dla HC-211B
+LMAM_HC251B_NDDT01---_TDI	Gęstość ND dla HC-251B
+LMAM_HC251B_NDFT01---_TFI	Przepływ ND dla HC-251B.FT01
+LMAM_HC251B_NDXSDI8--_PV	Wart. mierz. gęsto. ND dla HC-251B
+LMAM_HC251C_NDDT01---_TDI	Pomiar gestosci
+LMAM_HC251C_NDFT01---_TFI	Przepływ ND dla HC-251C.FT01
+LMAM_HC251C_NDPT01---_TPI	Pomiar cisnienia
+LMAM_HC251C_NDXRDI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC251C_NDXRFI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC251C_NDXRPI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_HC251C_WPFT01---_TFI	Pomiar przeplywu
+LMAM_HC251C_WPXRFI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_K211--_NDDT01---_TDI	Gęstość nadawy K-211
+LMAM_K211--_NDXSDI8--_PV	MillVis Wartosc mierzona ges K211
+LMAM_K211--_PLDT01---_TDI	Gęstość ND na przelewie dla K-211
+LMAM_K211--_PLDT02---_TDI	Gęstość ND na przelewie dla K-211
+LMAM_K211--_PPSKN01--_TLI	Średnia wys. warstwy PP dla K-211
+LMAM_K211--_WPFT01---_TFI	Przepływ wody przem. dla K-211
+LMAM_K211--_WPXRFI1--_PV	Wart. mierzona przepływu wody przem. dla K-211
+LMAM_MF201-_NDXSLI8--_PV	MillVis Wartosc mierzona poz MF201
+LMAM_MF211-_NDXSLI8--_PV	MillVis Wartosc mierzona poz MF211
+LMAM_MK212-_---------_EPX	Moc silnika dla MK-212
+LMAM_MK212-_WPFT01---_TFI	Przepływ wody przem. dla MK-212
+LMAM_MK212-_WPXRFI1--_PV	Wart. mierzona przepływu wody przem. dla MK-212
+LMAM_MP211-_---------_EPX	Moc silnika dla MP-211
+LMAM_MP211-_RDXRFI1--_PV	Wart. mierzona przepływu rudy dla MP-211
+LMAM_MP211-_RDXRFI2--_PV	Wart. mierz. przepł. RD dla MP-211 z AI
+LMAM_MP211-_WLEQ01---_TDI	Gęstość ND dla MP-211
+LMAM_MP211-_WPFT01---_TFI	Przepływ wody przem. dla MP-211
+LMAM_MP211-_WPXRFI2--_PV	Wart. mierzona przepływu wody przem. dla MP-211
+LMAM_OBM1C2_WPPT01---_TPI	Ciśnienie wody przem. dla OBM-1C2.PT01
+LMAM_PM201A_---------_EPX	Moc silnika dla PM-201A
+LMAM_PM201A_---------_TNI	Prędkość obrotowa dla PM-201A
+LMAM_PM201B_---------_EPX	Moc silnika dla PM-201B
+LMAM_PM201B_---------_TNI_ERPM	Pomiar predkosci obrotowej
+LMAM_PM201B_--FAL1---_EI3	Prad 3-fazowy
+LMAM_PM201B_--FAL1---_TNI_ERPM	Pomiar predkosci obrotowej
+LMAM_PM201B_--FAL2---_EI3	Prad 3-fazowy
+LMAM_PM201B_--FAL2---_TNI_ERPM	Pomiar predkosci obrotowej
+LMAM_PM211A_---------_EPX	Moc silnika dla PM-211A
+LMAM_PM211A_---------_TNI	Prędkość obrotowa dla PM-211A
+LMAM_PM211B_---------_EPX	Moc silnika dla PM-211B
+LMAM_PM212A_---------_EPX	Moc silnika dla PM-212A
+LMAM_PM212A_---------_TNI	Prędkość obrotowa dla PM-212A
+LMAM_PM212A_--FAL1---_EI3	Prad 3-fazowy
+LMAM_PM212A_--FAL1---_TNI_ERPM	Pomiar predkosci obrotowej
+LMAM_PM212A_--FAL2---_EI3	Prad 3-fazowy
+LMAM_PM212A_--FAL2---_TNI_ERPM	Pomiar predkosci obrotowej
+LMAM_PM212B_---------_EPX	Moc silnika dla PM-212B
+LMAM_PM212B_---------_TNI	Prędkość obrotowa dla PM-212B
+LMAM_PM251B_---------_EPX	Moc silnika dla PM-251B
+LMAM_PM251C_---------_EPX	Moc silnika dla PM-251C
+LMAM_PM251C_--FAL1---_EI3	Prad 3-fazowy
+LMAM_PM251C_--FAL1---_TNI_ERPM	Pomiar predkosci obrotowej
+LMAM_PM251C_--FAL2---_EI3	Prad 3-fazowy
+LMAM_PM251C_--FAL2---_TNI_ERPM	Pomiar predkosci obrotowej
+LMAM_RZM201_NDLT01---_TLI	Pomiar poziomu
+LMAM_RZM201_NDXRLI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_RZM201_NDXSLI16-_PV	Wart. mierz. poz. ND dla RZM-201
+LMAM_RZM201_NDXSLI8--_PV	MillVis Wartosc mierzona poz RZM201
+LMAM_RZM201_WPFT01---_TFI	Pomiar przeplywu
+LMAM_RZM201_WPXRFI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_RZM211_NDLT01---_TLI	Poziom nadawy dla RZM-211
+LMAM_RZM211_NDXSLI16-_PV	Wart. mierz. poz. ND dla RZM-211
+LMAM_RZM211_NDXSLI8--_PV	MillVis Wartosc mierzona poz RZM211
+LMAM_RZM211_OPPDO1---_TFI	Przepływ odcz. pianotwórczego dla RZM-211
+LMAM_RZM211_OPXRFI2--_PV	Wart. mierzona przepływu odcz. pianotwórczego dla RZM-211
+LMAM_RZM211_OZPDO1---_TFI	Przepływ odcz. zbierającego dla RZM-211
+LMAM_RZM211_OZXRFI1--_PV	Wart. mierzona przepływu odcz. zbierającego dla RZM-211
+LMAM_RZM211_WPFT01---_TFI	Przepływ wody przem. dla RZM-211
+LMAM_RZM211_WPXRFI1--_PV	Wart. mierz. przepł. WP dla RZM-211
+LMAM_RZM212_NDLT01---_TLI	Pomiar poziomu
+LMAM_RZM212_NDXRLI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_RZM212_NDXSLI16-_PV	Wart. mierz. poz. ND dla RZM-212
+LMAM_RZM212_NDXSLI8--_PV	MillVis Wartosc mierzona poz RZM212
+LMAM_RZM212_WPFT01---_TFI	Pomiar przeplywu
+LMAM_RZM212_WPXRFI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_RZM251_NDLT01---_TLI	Poziom ND dla RZM-251
+LMAM_RZM251_NDXRLI1--_PV	Wartosc mierzona skalowana min-max
+LMAM_RZM251_WPFT01---_TFI	Przepływ WP dla RZM-251.FT01
+LMAM_RZM251_WPXRFI1--_PV	Wart. mierz. przepł. WP dla RZM-251
+LMAM_TM141-_RDFQ01---_TFI	Przepływ RD dla TM-141.FQ01
+LMAM_TM211-_---------_EPX	Moc silnika dla TM-211
+LMAM_TM211-_RDFQ01---_TFI	Przepływ rudy dla TM-211
+LMAM_TM212-_---------_EPX	Moc silnika dla TM-212
+LMAM_TM213-_---------_EPX	Moc silnika dla TM-213
+LMAP_HC201A-_WPXRFI1--_RT	Proporcja woda-woda dla HC-201A
+LMAP_HC201B-_WPXRFI1--_RT	Proporcja woda-woda dla HC-201B
+LMAP_HC212A-_WPXRFI1--_RT	Proporcja woda-woda dla HC-212A
+LMAP_HC212A_NDPT01---_TPI_EMAX	Max. zakresu pomiar. dla HC-212A.PT01 (F_CV)
+LMAP_HC212A_NDPT01---_TPI_EMIN	Min. zakresu pomiar. dla HC-212A.PT01 (F_CV)
+LMAP_HC212B-_WPXRFI1--_RT	Proporcja woda-woda dla HC-212B
+LMAY_WM2212_--FAL----_CVF	Wydajność falownika dla WM-2212
+LMAY_WM2213_--FAL----_CVF	Wydajność falownika dla WM-2213
+LMAY_WM3212_--FAL----_CVF	Wydajność falownika dla WM-3212
+LMAY_WM5213_--FAL----_CVF	Wydajność falownika dla WM-5213
+	
