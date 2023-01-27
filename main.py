@@ -3,12 +3,15 @@
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 import logging.config
+import os
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
 import xgboost as xgb
 
-from processing.raw.extract import extract_fn
+from processing.raw.extract import extract_fn, parse_schema
+from processing.raw.transform import transform_fn
 
 logging.config.fileConfig("logging.conf")
 
@@ -23,11 +26,21 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == "__main__":
-    print_hi("PyCharm")
-    extract_fn(
-        src_dir="data/ZWRL_1M2C_S1_20200908_15",
-        target_schema_path="data/ZWRL_1M2C_S1_20200908_15/His_2c_zmienne_s1.xlsx",
-        target_path="data/target/ZWRL_1M2C_S1_20200908_15/raw_001.csv",
-    )
+    # print_hi("PyCharm")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    BASEDIR = "data"
+    DATASET = "ZWRL_1M2C_S1_20200908_15"
+    SCHEMA = "His_2c_zmienne_s1.xlsx"
+    TARGET_POSTFIX = datetime.now().strftime("%Y%m%d%H%M%S")
+
+    schema_path = os.path.join(BASEDIR, DATASET, SCHEMA)
+    src_dir = os.path.join(BASEDIR, DATASET)
+    target_dir = os.path.join(BASEDIR, "target", DATASET)
+
+    schema_path = parse_schema(schema_path=schema_path)
+    extract_fn(src_dir=src_dir, target_path=os.path.join(target_dir, f"raw_{TARGET_POSTFIX}.csv"))
+    transform_fn(
+        src_path=os.path.join(target_dir, f"raw_{TARGET_POSTFIX}.csv"),
+        src_schema_path=schema_path,
+        target_path=os.path.join(target_dir, f"tr_{TARGET_POSTFIX}.csv")
+    )
