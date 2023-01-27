@@ -42,14 +42,20 @@ def extract_fn(src_dir: str, target_schema_path: str, target_path: str):
     is_initial = True
     for i, path in enumerate(loading_paths):
         log.info(f"{i+1}/{loading_paths_number} processing: {path}")
-        var_df = pd.read_csv(path, dtype=RAW_SCHEMA, usecols=list(RAW_SCHEMA), **csv_in_parameters)
-        target_colname = var_df[["Zmienna"]].head(1).values[0][0]
-        var_df = var_df[["Czas", "Wartosc"]].rename(columns={'Wartosc': target_colname})
-        if is_initial:
-            target_df = var_df
-            is_initial = False
-            continue
-        target_df = target_df.merge(var_df, how="outer", on="Czas")
+        var_df = pd.read_csv(path, dtype=RAW_SCHEMA, usecols=["Zmienna", "Wartosc", "Czas"], **csv_in_parameters)
+
+        unique_vars = var_df["Zmienna"].unique()
+        if len(unique_vars) > 1:
+            log.info(f"{i+1}/{loading_paths_number} ! more than 2 vars {unique_vars}")
+
+        for var in unique_vars:
+            side_var_df = var_df[var_df["Zmienna"] == var]
+            side_var_df = side_var_df[["Czas", "Wartosc"]].rename(columns={'Wartosc': var})
+            if is_initial:
+                target_df = side_var_df
+                is_initial = False
+                continue
+            target_df = target_df.merge(side_var_df, how="outer", on="Czas")
 
     log.info(f"saving target file: {target_path}")
     target_df.to_csv(
