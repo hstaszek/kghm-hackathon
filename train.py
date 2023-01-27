@@ -8,7 +8,7 @@ from sklearn.model_selection import RepeatedKFold, cross_val_score, train_test_s
 from utils.utils import remove_blacklisted, remove_redundant_columns
 import joblib
 
-hc = 'HC201A'
+hc = 'HC212B'
 prefix = f'tr_20230127213409_{hc}_'
 y_name = f'LMAM_{hc}_PLKL90---_TPG'
 
@@ -18,14 +18,14 @@ df = remove_blacklisted(df, file='feature_lists/blacklist15.txt')
 df = remove_redundant_columns(df)
 
 
-X = df.drop(columns=y_name).to_numpy()
-y = df[y_name].to_numpy()
+X = df.drop(columns=y_name)
+y = df[y_name]
 
 
-test_size = 500
-split_index = 5000
-X_train, X_test = np.concatenate([X[0:split_index + 1], X[split_index + test_size:]]), X[split_index:split_index + test_size + 1]
-y_train, y_test = np.concatenate([y[0:split_index + 1], y[split_index + test_size:]]), y[split_index:split_index + test_size + 1]
+test_size = 1000
+split_index = 4000
+X_train, X_test = pd.concat([X.iloc[0:split_index + 1], X.iloc[split_index + test_size:]]), X.iloc[split_index:split_index + test_size + 1]
+y_train, y_test = pd.concat([y.iloc[0:split_index + 1], y.iloc[split_index + test_size:]]), y.iloc[split_index:split_index + test_size + 1]
 
 model = XGBRegressor(
     # n_estimators=1000, 
@@ -52,10 +52,11 @@ test_pred = model.predict(X_test)
 
 
 # plot feature importance
-plot_importance(model)
+fig, ax = plt.subplots(figsize=(8,8))
+plot_importance(model, max_num_features=20)
 plt.show()
 
-joblib.dump(model, 'xgb15.joblib')
+joblib.dump(model, f'xgb15{hc}.joblib')
 
 
 

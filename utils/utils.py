@@ -33,6 +33,12 @@ def remove_redundant_columns(df: pd.DataFrame) -> pd.DataFrame:
     if 'idx' in df.columns:
         df = df.drop(columns='idx')
 
+    if 'idx.0' in df.columns:
+        df = df.drop(columns='idx.0')
+
+    if 'idx.1' in df.columns:
+        df = df.drop(columns='idx.1')
+
     
     columns_without_zeros = df.columns.to_numpy()[~np.isclose(df.std(), 0.0, rtol=1e-4)]
 
