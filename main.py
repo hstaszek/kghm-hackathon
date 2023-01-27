@@ -31,21 +31,23 @@ if __name__ == "__main__":
     BASEDIR = "data"
     DATASET = "ZWRL_1M2C_S1_20200908_15"
     SCHEMA = "His_2c_zmienne_s1.xlsx"
+
+    OUTPUT_DIR = "output"
     TARGET_POSTFIX = datetime.now().strftime("%Y%m%d%H%M%S")
 
     schema_path = os.path.join(BASEDIR, DATASET, SCHEMA)
     src_dir = os.path.join(BASEDIR, DATASET)
-    target_dir = os.path.join(BASEDIR, "target", DATASET)
+    target_dir = os.path.join(OUTPUT_DIR, "target", DATASET)
 
     target_paths = {
-        "extract": os.path.join(target_dir, "raw", f"raw_{TARGET_POSTFIX}.csv"),
-        "transform": os.path.join(target_dir, "train", f"tr_{TARGET_POSTFIX}.csv"),
+        "extract": os.path.join(target_dir, TARGET_POSTFIX, "raw", f"raw.csv"),
+        "transform": os.path.join(target_dir, TARGET_POSTFIX, "train", f"tr_{{}}.csv"),
     }
 
     schema_path = parse_schema(schema_path=schema_path)
     extract_fn(src_dir=src_dir, target_path=target_paths.get("extract"))
     transform_fn(
-        src_path=target_paths.get("raw"),
+        src_path=target_paths.get("extract"),
         src_schema_path=schema_path,
         target_path=target_paths.get("transform")
     )
