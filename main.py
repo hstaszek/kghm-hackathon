@@ -37,10 +37,15 @@ if __name__ == "__main__":
     src_dir = os.path.join(BASEDIR, DATASET)
     target_dir = os.path.join(BASEDIR, "target", DATASET)
 
+    target_paths = {
+        "extract": os.path.join(target_dir, "raw", f"raw_{TARGET_POSTFIX}.csv"),
+        "transform": os.path.join(target_dir, "train", f"tr_{TARGET_POSTFIX}.csv"),
+    }
+
     schema_path = parse_schema(schema_path=schema_path)
-    extract_fn(src_dir=src_dir, target_path=os.path.join(target_dir, f"raw_{TARGET_POSTFIX}.csv"))
+    extract_fn(src_dir=src_dir, target_path=target_paths.get("extract"))
     transform_fn(
-        src_path=os.path.join(target_dir, f"raw_{TARGET_POSTFIX}.csv"),
+        src_path=target_paths.get("raw"),
         src_schema_path=schema_path,
-        target_path=os.path.join(target_dir, f"tr_{TARGET_POSTFIX}.csv")
+        target_path=target_paths.get("transform")
     )
