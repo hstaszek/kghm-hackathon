@@ -7,8 +7,7 @@ csv_in_parameters = {
 
 csv_out_parameters = {
     "mode": "w",
-    "index": True,
-    "index_label": "idx",
+    "index": False,
     "sep": ",",
     "encoding": "utf-8",
 }

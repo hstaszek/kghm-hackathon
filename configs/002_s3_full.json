@@ -1,0 +1,13 @@
+{
+  "section_name": "ZWRL_1M2C_S3_20210805_12",
+  "schema_path": "data/ZWRL_1M2C_S3_20210805_12/His_2c_zmienne_s3.xlsx",
+  "process": {
+    "extract": {
+      "source_path": "data/ZWRL_1M2C_S3_20210805_12/*",
+      "target_path": "output/ZWRL_1M2C_S3_20210805_12/raw/*"
+    },
+    "transform": {
+      "target_path": "output/ZWRL_1M2C_S3_20210805_12/transform/*"
+    }
+  }
+}
