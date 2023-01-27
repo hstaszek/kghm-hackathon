@@ -34,6 +34,12 @@ def run(config: str):
             section=section,
             src_path=extract_target_path,
         )
+    # find_corelations(
+    #     src_csv=PATH_TO_COMBO_.CSV_FILE,
+    #     schema_path = os.path.join(BASEDIR, DATASET, SCHEMA),
+    #     target_path = target_dir
+    # )
+
 
 
 if __name__ == "__main__":
