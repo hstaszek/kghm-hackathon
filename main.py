@@ -31,11 +31,13 @@ if __name__ == "__main__":
     BASEDIR = "data"
     DATASET = "ZWRL_1M2C_S1_20200908_15"
     SCHEMA = "His_2c_zmienne_s1.xlsx"
+
+    OUTPUT_DIR = "output"
     TARGET_POSTFIX = datetime.now().strftime("%Y%m%d%H%M%S")
 
     schema_path = os.path.join(BASEDIR, DATASET, SCHEMA)
     src_dir = os.path.join(BASEDIR, DATASET)
-    target_dir = os.path.join(BASEDIR, "target", DATASET)
+    target_dir = os.path.join(OUTPUT_DIR, "target", DATASET)
 
     target_paths = {
         "extract": os.path.join(target_dir, TARGET_POSTFIX, "raw", f"raw.csv"),
