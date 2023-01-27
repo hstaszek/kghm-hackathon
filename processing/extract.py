@@ -1,16 +1,18 @@
 import logging
 import os
 import json
+from typing import Dict
 
 import pandas as pd
 
-from processing.raw.configs import csv_in_parameters, csv_out_parameters
-from processing.raw.schema import RAW_SCHEMA
+from processing.configs import csv_in_parameters, csv_out_parameters
+from processing.schema import RAW_SCHEMA
 
 log = logging.getLogger('base')
 
 
-def parse_schema(schema_path: str):
+def parse_schema(conf: Dict):
+    schema_path = conf.get("schema_path")
     target_schema = pd.read_excel(schema_path, dtype={"tagname": "object"}, usecols=[0])
     target_schema = target_schema["tagname"].tolist()
     target_schema = {"Czas": "object", **{col: "float64" for col in target_schema}}
@@ -25,13 +27,23 @@ def parse_schema(schema_path: str):
     return target_schema_path
 
 
-def extract_fn(src_dir: str, target_path: str):
-    loading_paths = []
-    for path in os.listdir(src_dir):
-        if path.endswith(".csv"):
-            loading_paths.append(os.path.join(src_dir, path))
+def extract_fn(conf: Dict, postfix: str):
+    src_path = conf.get("source_path")
+
+    loading_paths = [src_path]
+    if src_path.endswith("*"):
+        src_dir = os.path.dirname(src_path)
+        loading_paths = []
+        for path in os.listdir(src_dir):
+            if path.endswith(".csv"):
+                loading_paths.append(os.path.join(src_dir, path))
     loading_paths_number = len(loading_paths)
     log.info(f"number of files: {loading_paths_number}")
+
+    target_path = conf.get("target_path")
+    if target_path.endswith("*"):
+        target_dir = os.path.dirname(target_path)
+        target_path = os.path.join(target_dir, f"raw_{postfix}.csv")
 
     os.makedirs(os.path.dirname(target_path), exist_ok=True)
     log.info(f"created target dir: {os.path.dirname(target_path)}")
@@ -58,3 +70,4 @@ def extract_fn(src_dir: str, target_path: str):
     log.info(f"saving target file: {target_path}")
     target_df.to_csv(target_path, **csv_out_parameters)
     log.info("extract_fn ends")
+    return target_path

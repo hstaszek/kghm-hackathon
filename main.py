@@ -1,53 +1,40 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import json
 import logging.config
-import os
 from datetime import datetime
 
-import numpy as np
-import pandas as pd
-import xgboost as xgb
+import click
 
-from processing.raw.extract import extract_fn, parse_schema
-from processing.raw.transform import transform_fn
+from processing.extract import extract_fn, parse_schema
+from processing.transform import transform_fn
 
 logging.config.fileConfig("logging.conf")
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f"Hi, {name}")  # Press ⌘F8 to toggle the breakpoint.
-    pandas_numpy_test = pd.Series([1, 3, 5, np.nan, 6, 8])
-    print(pandas_numpy_test)
-    xgb_test = xgb.DMatrix(pandas_numpy_test, label=np.random.randint(2, size=6))
+@click.command()
+@click.option("-c", "--config", type=str, help="A path to the processing configuration")
+def run(config: str):
+    with open(config, "r") as f:
+        conf = json.load(f)
+    common_postfix = datetime.now().strftime("%Y%m%d%H%M%S")
+
+    schema_path = parse_schema(conf=conf)
+
+    extract_target_path = None
+    extract_conf = conf.get("process").get("extract")
+    if extract_conf:
+        extract_target_path = extract_fn(conf=extract_conf, postfix=common_postfix)
+
+    transform_conf = conf.get("process").get("transform")
+    if transform_conf:
+        section = conf.get("section_name")
+        transform_fn(
+            conf=transform_conf,
+            schema_path=schema_path,
+            postfix=common_postfix,
+            section=section,
+            src_path=extract_target_path,
+        )
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == "__main__":
-    # print_hi("PyCharm")
-
-    BASEDIR = "data"
-    DATASET = "ZWRL_1M2C_S1_20200908_15"
-    SCHEMA = "His_2c_zmienne_s1.xlsx"
-
-    OUTPUT_DIR = "output"
-    TARGET_POSTFIX = datetime.now().strftime("%Y%m%d%H%M%S")
-
-    schema_path = os.path.join(BASEDIR, DATASET, SCHEMA)
-    src_dir = os.path.join(BASEDIR, DATASET)
-    target_dir = os.path.join(OUTPUT_DIR, "target", DATASET)
-
-    target_paths = {
-        "extract": os.path.join(target_dir, TARGET_POSTFIX, "raw", f"raw.csv"),
-        "transform": os.path.join(target_dir, TARGET_POSTFIX, "train", f"tr_{{}}.csv"),
-    }
-
-    schema_path = parse_schema(schema_path=schema_path)
-    extract_fn(src_dir=src_dir, target_path=target_paths.get("extract"))
-    transform_fn(
-        src_path=target_paths.get("extract"),
-        src_schema_path=schema_path,
-        target_path=target_paths.get("transform")
-    )
+    run()
