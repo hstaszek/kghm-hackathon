@@ -15,6 +15,9 @@ def transform_fn(src_path: str, src_schema_path: str, target_path: str):
     with open(src_schema_path, "r") as f:
         schema = json.load(f)
 
+    os.makedirs(os.path.dirname(target_path), exist_ok=True)
+    log.info(f"created target dir: {os.path.dirname(target_path)}")
+
     input_df = pd.read_csv(src_path, dtype=schema, **csv_in_parameters)
 
     input_df["Czas"] = pd.to_datetime(input_df["Czas"], format="%d.%m.%Y %H:%M:%S")
