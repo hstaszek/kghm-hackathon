@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 grupy_sekcji_1 = { # 1
      'OBM1C2':1,
      'MP211-':1,
