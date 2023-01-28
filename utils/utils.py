@@ -29,6 +29,13 @@ def remove_blacklisted(df: pd.DataFrame, file: str = 'blacklist15.txt') -> pd.Da
     _df = df.drop(columns=to_drop)
     return _df
 
+
+def select_whitelisted(df: pd.DataFrame, file: str, y_col: str) -> pd.DataFrame:
+    with open(file, 'r') as f:
+        whitelist = json.load(f)
+    return df[whitelist + [y_col]]
+
+
 def remove_redundant_columns(df: pd.DataFrame) -> pd.DataFrame:
     '''
     Remove columns like 'Czas' and 'idx' if they appear in DF and remove zero-std features.
