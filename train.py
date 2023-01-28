@@ -8,11 +8,12 @@ from sklearn.model_selection import RepeatedKFold, cross_val_score, train_test_s
 from utils.utils import remove_blacklisted, remove_redundant_columns, filter_device_groups
 import joblib
 
-hc = 'HC212B'
-prefix = f'tr_20230127234430_{hc}_'
+hc = 'HC201A'
+prefix = f'tr_20230127213409_{hc}_'
 y_name = f'LMAM_{hc}_PLKL90---_TPG'
 groups = ["1", "2", "3"]
 
+#tr_20230127213409_HC201A_LMAM_HC201A_PL-------_TPS
 df = pd.read_csv(f'dumbdata/{prefix}{y_name}.csv')
 
 df = remove_blacklisted(df, file='feature_lists/blacklist15.txt')
@@ -23,14 +24,15 @@ X = df.drop(columns=y_name)
 y = df[y_name]
 
 
+
 test_size = 1000
-split_index = 4000
+split_index = 6000
 X_train, X_test = pd.concat([X.iloc[0:split_index + 1], X.iloc[split_index + test_size:]]), X.iloc[split_index:split_index + test_size + 1]
 y_train, y_test = pd.concat([y.iloc[0:split_index + 1], y.iloc[split_index + test_size:]]), y.iloc[split_index:split_index + test_size + 1]
 
 model = XGBRegressor(
-    # n_estimators=1000, 
-    # max_depth=7, 
+    # n_estimators=100, 
+    # max_depth=15, 
     # eta=0.1, 
     # subsample=0.7, 
     # colsample_bytree=0.8
@@ -53,11 +55,23 @@ test_pred = model.predict(X_test)
 
 
 # plot feature importance
-fig, ax = plt.subplots(figsize=(8,8))
-plot_importance(model, max_num_features=20)
+fig, ax = plt.subplots(ncols=3, figsize=(16,8))
+plot_importance(model, max_num_features=20, ax=ax[0], title='weight', importance_type='weight')
+plot_importance(model, max_num_features=20, ax=ax[1], title='gain', importance_type='gain')
+plot_importance(model, max_num_features=20, ax=ax[2], title='cover', importance_type='cover')
+plt.suptitle('XGBOOST internal feature importance')
+plt.tight_layout()
 plt.show()
 
 joblib.dump(model, f'xgb15{hc}.joblib')
+
+
+fig = plt.figure()
+error = y_test - test_pred
+plt.hist(error, bins=20)
+plt.title('Errors')
+plt.show()
+
 
 
 
