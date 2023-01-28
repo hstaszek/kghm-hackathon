@@ -57,6 +57,8 @@ def transform_fn(conf: Dict, schema_path: str, postfix: str, section: str, src_p
     input_df["Czas"] = pd.to_datetime(input_df["Czas"], format="%d.%m.%Y %H:%M:%S")
     input_df.sort_values(by="Czas", axis=0, inplace=True)
 
+    # TODO: apply mapping
+
     in_rows_number = input_df.shape[0]
     log.info(f"initial - shape: {input_df.shape}")
     log.info(f"initial - rows number: {in_rows_number}")
