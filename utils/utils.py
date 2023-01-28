@@ -1,5 +1,11 @@
+import json
+from typing import List
+
 import pandas as pd
 import numpy as np
+
+from grupy import grupy_sekcji_1
+
 
 def remove_blacklisted(df: pd.DataFrame, file: str = 'blacklist15.txt') -> pd.DataFrame:
     '''
@@ -44,3 +50,12 @@ def remove_redundant_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 
     return df[columns_without_zeros]
+
+
+def filter_device_groups(df: pd.DataFrame, file: str, groups: List[str]):
+    with open(file, 'r') as f:
+        json_load = json.load(f)
+
+    unloaded_lists = [col for group in groups for col in json_load.get(group)]
+
+    return df[unloaded_lists]
