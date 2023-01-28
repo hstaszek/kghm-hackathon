@@ -56,5 +56,5 @@ def filter_device_groups(df: pd.DataFrame, file: str, groups: List[str], y_name:
     with open(file, 'r') as f:
         json_load = json.load(f)
     unloaded_lists = [col for group in groups for col in json_load.get(group)]
-    selected_list = [col for device in unloaded_lists for col in df.columns if device in col] + [y_name]
+    selected_list = [col for device in unloaded_lists for col in df.columns if device in col and device not in y_name] + [y_name]
     return df[selected_list]
