@@ -5,14 +5,17 @@ import json
 from xgboost import XGBRegressor
 from xgboost import plot_importance
 from sklearn.model_selection import RepeatedKFold, cross_val_score, train_test_split
-from utils.utils import remove_blacklisted, remove_redundant_columns
+from utils.utils import remove_blacklisted, remove_redundant_columns, filter_device_groups
 import joblib
 
-hc = 'HC212B'
+hc = 'HC201A'
 prefix = f'tr_20230127213409_{hc}_'
 y_name = f'LMAM_{hc}_PLKL90---_TPG'
+groups = ["1", "2", "3"]
 
 df = pd.read_csv(f'dumbdata/{prefix}{y_name}.csv')
+
+df = filter_device_groups(df, file='feature_lists/15groups.json', groups=groups, y_name=y_name)
 
 df = remove_blacklisted(df, file='feature_lists/blacklist15.txt')
 df = remove_redundant_columns(df)

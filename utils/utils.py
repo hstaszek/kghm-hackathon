@@ -52,10 +52,10 @@ def remove_redundant_columns(df: pd.DataFrame) -> pd.DataFrame:
     return df[columns_without_zeros]
 
 
-def filter_device_groups(df: pd.DataFrame, file: str, groups: List[str]):
+def filter_device_groups(df: pd.DataFrame, file: str, groups: List[str], y_name: str):
     with open(file, 'r') as f:
         json_load = json.load(f)
 
-    unloaded_lists = [col for group in groups for col in json_load.get(group)]
+    unloaded_lists = [col for group in groups for col in json_load.get(group)] + [y_name]
 
     return df[unloaded_lists]
