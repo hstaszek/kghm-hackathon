@@ -1,6 +1,7 @@
 from typing import List
 
 section1_to_section_3 = {
+    "Czas": "Czas",
     "LMAM_HC201-_NDXSDI16-_PV": "LMAM_HC203-_NDXSDI16-_PV",
     "LMAM_HC201-_NDXSDI8--_PV": "LMAM_HC203-_NDXSDI8--_PV",
     "LMAM_HC201A_NDDT01---_TDI": "LMAM_HC203A_NDDT01---_TDI",

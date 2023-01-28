@@ -26,14 +26,14 @@ def run(input_path: str, schema_path: str, output_path: str, section: str):
     """
     common_postfix = datetime.now().strftime("%Y%m%d%H%M%S")
 
-    output_dir = os.path.join(output_path, common_postfix)
+    output_dir = os.path.join(output_path, section, common_postfix)
     os.makedirs(output_dir, exist_ok=True)
     log.info(f"created target dir: {os.path.dirname(output_path)}")
 
     schema_path = parse_schema(schema_path)
 
     extract_target_path = collect_fn(input_path, output_dir)
-    load_target_path = transform_fn(extract_target_path, schema_path, section, output_dir)
+    load_target_path = transform_fn(extract_target_path, schema_path, output_dir)
 
     # find_corelations(
     #     src_csv=PATH_TO_COMBO_.CSV_FILE,
