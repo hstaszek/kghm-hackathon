@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import json
 from xgboost import XGBRegressor
 from xgboost import plot_importance
 from sklearn.model_selection import RepeatedKFold, cross_val_score, train_test_split
@@ -13,7 +12,6 @@ prefix = f'tr_20230127213409_{hc}_'
 y_name = f'LMAM_{hc}_PLKL90---_TPG'
 groups = ["1", "2", "3"]
 
-#tr_20230127213409_HC201A_LMAM_HC201A_PL-------_TPS
 df = pd.read_csv(f'dumbdata/{prefix}{y_name}.csv')
 
 df = remove_blacklisted(df, file='feature_lists/blacklist15.txt')
@@ -22,8 +20,6 @@ df = filter_device_groups(df, file='feature_lists/15groups.json', groups=groups,
 
 X = df.drop(columns=y_name)
 y = df[y_name]
-
-
 
 test_size = 1000
 split_index = 6000
@@ -37,7 +33,6 @@ model = XGBRegressor(
     # subsample=0.7, 
     # colsample_bytree=0.8
     )
-
 
 cv = RepeatedKFold(n_splits=5, n_repeats=1, random_state=44)
 
@@ -53,27 +48,7 @@ scores = cross_val_score(model,
 model.fit(X_train, y_train)
 test_pred = model.predict(X_test)
 
-
-# plot feature importance
-fig, ax = plt.subplots(ncols=3, figsize=(16,8))
-plot_importance(model, max_num_features=20, ax=ax[0], title='weight', importance_type='weight')
-plot_importance(model, max_num_features=20, ax=ax[1], title='gain', importance_type='gain')
-plot_importance(model, max_num_features=20, ax=ax[2], title='cover', importance_type='cover')
-plt.suptitle('XGBOOST internal feature importance')
-plt.tight_layout()
-plt.show()
-
 joblib.dump(model, f'xgb15{hc}.joblib')
-
-
-fig = plt.figure()
-error = y_test - test_pred
-plt.hist(error, bins=20)
-plt.title('Errors')
-plt.show()
-
-
-
 
 # force scores to be positive
 scores = np.absolute(scores)
@@ -87,6 +62,21 @@ print(f'Max {y.max():.2f}')
 print(f'Mean {y.mean():.2f}')
 print(f'Std {y.std():.2f}')
 
+# plot feature importance
+fig, ax = plt.subplots(ncols=3, figsize=(16,8))
+plot_importance(model, max_num_features=20, ax=ax[0], title='weight', importance_type='weight')
+plot_importance(model, max_num_features=20, ax=ax[1], title='gain', importance_type='gain')
+plot_importance(model, max_num_features=20, ax=ax[2], title='cover', importance_type='cover')
+plt.suptitle('XGBOOST internal feature importance')
+plt.tight_layout()
+plt.show()
+
+fig = plt.figure()
+
+error = y_test - test_pred
+plt.hist(error, bins=20)
+plt.title('Errors')
+plt.show()
 
 fig = plt.figure()
 
