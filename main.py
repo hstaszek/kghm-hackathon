@@ -5,6 +5,7 @@ from datetime import datetime
 import click
 
 from processing.extract import parse_schema, collect_fn, transform_fn
+from training.train_002_common import train_fn
 
 logging.config.fileConfig("logging.conf")
 log = logging.getLogger('base')
@@ -34,12 +35,7 @@ def run(input_path: str, schema_path: str, output_path: str, section: str):
 
     extract_target_path = collect_fn(input_path, output_dir)
     load_target_path = transform_fn(extract_target_path, schema_path, output_dir)
-
-    # find_corelations(
-    #     src_csv=PATH_TO_COMBO_.CSV_FILE,
-    #     schema_path = os.path.join(BASEDIR, DATASET, SCHEMA),
-    #     target_path = target_dir
-    # )
+    train_fn(load_target_path, section, output_dir)
 
 
 if __name__ == "__main__":

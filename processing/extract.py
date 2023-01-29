@@ -84,3 +84,4 @@ def transform_fn(src_path: str, schema_path: str, out_path: str):
     out_df.to_csv(target_path, **csv_out_parameters)
 
     log.info("transform_fn ends")
+    return target_path
