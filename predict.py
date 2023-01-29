@@ -25,7 +25,12 @@ def run(input_path: str, schema_path: str, output_path: str, section: str):
     # Apply batch smoothing
         
 # Load models
-    #model = joblib.load(...)
+    models = {
+        's1': {},
+        's2': {}
+    }
+    for section in ['s1', 's2']:
+        
 
 # Inference
     y_pred = model.predict(X)

@@ -10,7 +10,7 @@ from utils.utils import remove_blacklisted, remove_redundant_columns, filter_dev
 from collections import defaultdict
 import json
 import tqdm
-from utils.utils import smooth_seven_minute_intervals, simple_smooth, holt
+from utils.utils import smooth_seven_minute_intervals, simple_smooth, simple_exp_smooth
 
 SHIFT = -4
 SHIFT_HCS = 0
@@ -18,7 +18,7 @@ SMOOTH = 15
 
 BRANCH = 'DOWN' # / 'DOWN'
 DATA_DIR = 'data/'
-SECTION = 3
+SECTION = 1
 GOAL_INDEX = 2
 
 UP = ["LMAM_HC20??_PL-------_TPS", "LMAM_HC20??_PLDT01---_TDI", "LMAM_HC20??_PLKL90---_TPG"]
@@ -60,9 +60,10 @@ for col in list(set(to_take) | set([y_name])):
         print(f'KEY NOT IN INDEX!: {col}')
 df = df[legal]
 
+raw_df = df.copy()
 
-df = holt(df, [y_name], alpha=0.05)
-df = holt(df, df.drop(columns=y_name).columns.to_list(), alpha=0.6)
+df = simple_exp_smooth(df, [y_name], alpha=0.1)
+df = simple_exp_smooth(df, df.drop(columns=y_name).columns.to_list(), alpha=0.9)
     
 df[y_name] = df[y_name].shift(SHIFT)
 df = df[df[y_name].notnull() & df[y_name] != 0]
@@ -127,6 +128,24 @@ for k in tqdm.tqdm(range(k_splits), desc='Training k-fold'):
 
 y_pred_history = np.concatenate(y_pred_history)
 
+model = XGBRegressor(**params)
+#model = Lasso(positive=False, fit_intercept=True)
+model.fit(X_train, y_train)
+gain_dict = model.get_booster().get_score(importance_type='gain')
+weight_dict = model.get_booster().get_score(importance_type='weight')
+cover_dict = model.get_booster().get_score(importance_type='cover')
+
+import json
+i = 5
+with open(f'gain{i}.json', 'w') as f:
+    json.dump(gain_dict, f)
+with open(f'weight{i}.json', 'w') as f:
+    json.dump(weight_dict, f)
+with open(f'cover{i}.json', 'w') as f:
+    json.dump(cover_dict, f)
+
+y_pred_history = simple_exp_smooth(pd.DataFrame(y_pred_history, columns=['hist']), ['hist'], alpha=0.06).to_numpy()
+
 print('K-FOLD scores;')
 for key, value in fold_metrics.items():
     print(f'{key}: {value};')
@@ -143,11 +162,14 @@ f"Mean mse {np.mean(fold_metrics['mse']):.2f};",
 f"Mean r2 {np.mean(fold_metrics['r2']):.2f};"
 ]
 
-x_range = range(len(y_pred_history))
-fig = plt.figure(figsize=(14,8))
-plt.plot(x_range, y_train, label='original')
-plt.plot(x_range, y_pred_history, label='predicted')
-plt.title(f'{y_name}\n{stats}\nModel:{type(model)}')
+x_range = range(len(y_pred_history[200:2000]))
+fig = plt.figure(figsize=(10,8))
+plt.plot(x_range, y_train[200:2000], label='Oryginalne pomiary', alpha=1.0)
+plt.plot(x_range, y_pred_history[200:2000], label='Estymacje', alpha=0.9)
+#plt.title(f'{y_name}\n{stats}\nModel:{type(model)}')
+plt.title(f'Pomiary i estymacje średniego uziarnienia dla HC-212B LMAM_HC212B_PL-------_TPS.\nPrezentowane wartości zostały wygładzone (SES).')
+plt.xlabel('Timestep (min)')
+plt.ylabel('Średnie uziarnienie dla HC-212B (um)')
 plt.savefig(f"images/unifu/s{SECTION}_{BRANCH}_{y_name.replace('?', '-')}.png")
 plt.legend()
 plt.show()
