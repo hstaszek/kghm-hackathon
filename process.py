@@ -19,7 +19,7 @@ log = logging.getLogger('base')
 def run(input_path: str, schema_path: str, output_path: str, section: str):
     """
     Example usage:
-    main.py \
+    process.py \
         -i data/ZWRL_1M2C_S1_20200908_15/* \
         -x data/ZWRL_1M2C_S1_20200908_15/His_2c_zmienne_s1.xlsx \
         -o output \
