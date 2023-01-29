@@ -22,4 +22,5 @@ process.py \
 ```
 
 ### Notes
-File `LMAM_HC212B_NDFT01---_TFI` has incorrect headers, it has to be corrected before running the script.
+* `exploration` contains our notebooks we used during exploration phase.  
+* File `LMAM_HC212B_NDFT01---_TFI` has incorrect headers, it has to be corrected before running the script.
