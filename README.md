@@ -5,7 +5,7 @@ Solution for CuValley Hack 2023.
 2. Run `pip -r requirements.txt`
 
 ```
-Example usage to process dataset and train models:
+Example usage to process dataset and train models (dataset is unpacked to data):
 process.py \
     -i 'data/ZWRL_1M2C_S1_20200908_15/*' \
     -x data/ZWRL_1M2C_S1_20200908_15/His_2c_zmienne_s1.xlsx \
